@@ -1,7 +1,5 @@
 package com.lasec.monitoreoapp.domain.usecase.manual_workorders.create_workorders
 
-import com.lasec.monitoreoapp.data.database.dao.manual_workorders.create_workorders.TaskPlanningRemoteMapDao
-import com.lasec.monitoreoapp.data.database.entities.manual_workorders.create_workorders.TaskPlanningRemoteMapEntity
 import com.lasec.monitoreoapp.data.remote.dto.TasksPlanningResponse
 import com.lasec.monitoreoapp.data.repository.manual_workorders.ManualWorkOrdersRepository
 import com.lasec.monitoreoapp.data.repository.manual_workorders.TasksPlanningRepository
@@ -13,8 +11,7 @@ import javax.inject.Inject
 class PostAllTasksPlanningsForAssignmentUseCase @Inject constructor(
     private val manualWorkOrdersRepository: ManualWorkOrdersRepository,
     private val workOrdersResponseRepository: WorkOrdersResponseRepository,
-    private val tasksPlanningRepo: TasksPlanningRepository,
-    private val taskPlanningRemoteMapDao: TaskPlanningRemoteMapDao
+    private val tasksPlanningRepo: TasksPlanningRepository
 ) {
     suspend operator fun invoke(assignmentLocalId: Int): List<TasksPlanningResponse> = withContext(Dispatchers.IO) {
         val plannings = manualWorkOrdersRepository.getPlanningsByAssignmentLocalId(assignmentLocalId)
@@ -45,15 +42,7 @@ class PostAllTasksPlanningsForAssignmentUseCase @Inject constructor(
                 error("Error al postear TaskPlanning: HTTP ${response.code()} - ${response.errorBody()?.string()}")
             }
 
-            val body = response.body()!!
-            results += body
-
-            taskPlanningRemoteMapDao.insertMap(
-                TaskPlanningRemoteMapEntity(
-                    taskPlanningLocalId = tp.taskPlanningLocalId,
-                    taskPlanningIdRemote = body.taskPlanningId
-                )
-            )
+            results += response.body()!!
         }
 
         results

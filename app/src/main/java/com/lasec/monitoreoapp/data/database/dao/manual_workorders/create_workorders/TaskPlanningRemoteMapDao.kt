@@ -11,6 +11,9 @@ interface TaskPlanningRemoteMapDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMap(entity: TaskPlanningRemoteMapEntity)
 
-    @Query("SELECT taskPlanningIdRemote FROM task_planning_remote_map WHERE taskPlanningLocalId = :localId")
+    @Query("SELECT taskPlanningId FROM task_planning_remote_map WHERE taskPlanningLocalId = :localId")
     suspend fun getRemoteId(localId: Int): String?
+
+    @Query("SELECT * FROM task_planning_remote_map WHERE taskPlanningLocalId = :localId")
+    suspend fun getByLocalId(localId: Int): TaskPlanningRemoteMapEntity?
 }
