@@ -12,9 +12,10 @@ class RegisterAndPostWorkOrderUseCase @Inject constructor(
     private val postFromLocal: PostWorkOrdersFromLocalUseCase,
     private val saveWoResponse: SaveWorkOrderResponseUseCase,
     private val authorizeVehiclesForAssignment: AuthorizeVehiclesForAssignmentUseCase,
-    private val authorizeEmployeesForAssignment: AuthorizeEmployeesForAssignmentUseCase,
     private val postAllTasksPlannings: PostAllTasksPlanningsForAssignmentUseCase,
-    private val saveTpResponse: SaveTpResponseUseCase
+    private val saveTpResponse: SaveTpResponseUseCase,
+    private val authorizedEmployeesForAssignment: AuthorizedEmployeesForAssignmentUseCase,
+    private val postTasksAssignment: PostTasksAssignmentUseCase
 
 ) {
     /**
@@ -38,14 +39,17 @@ class RegisterAndPostWorkOrderUseCase @Inject constructor(
         )
 
         authorizeVehiclesForAssignment(assignmentLocalId)
-        authorizeEmployeesForAssignment(assignmentLocalId)
         val tpResponses: List<TasksPlanningResponse> = postAllTasksPlannings(assignmentLocalId)
+
+
         saveTpResponse(
             assignmentLocalId = assignmentLocalId,
             responses = tpResponses
         )
 
+        authorizedEmployeesForAssignment(assignmentLocalId)
 
+        postTasksAssignment(assignmentLocalId)
 
         return response
     }

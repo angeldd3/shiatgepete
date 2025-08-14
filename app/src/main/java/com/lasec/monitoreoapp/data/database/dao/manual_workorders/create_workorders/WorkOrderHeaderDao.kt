@@ -27,4 +27,7 @@ interface WorkOrderHeaderDao {
         LIMIT 1
     """)
     suspend fun getWorkOrderIdForAssignment(assignmentLocalId: Int): String?
+
+    @Query("SELECT * FROM work_orders_header WHERE workOrderId = :workOrderId LIMIT 1")
+    suspend fun getHeaderById(workOrderId: String): WorkOrderHeaderEntity?
 }

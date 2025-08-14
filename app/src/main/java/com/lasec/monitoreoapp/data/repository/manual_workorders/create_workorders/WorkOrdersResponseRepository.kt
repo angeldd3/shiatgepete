@@ -35,5 +35,8 @@ class WorkOrdersResponseRepository @Inject constructor(
         return placeWorkOrderDao.getPlaceWorkOrderId(workOrderId, placeId)
     }
 
+    suspend fun getWorkOrderHeader(workOrderId: String): WorkOrderHeaderEntity? {
+        return workOrderHeaderDao.getHeaderById(workOrderId)
+    }
 
     }

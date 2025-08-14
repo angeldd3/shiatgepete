@@ -1,5 +1,6 @@
 package com.lasec.monitoreoapp.domain.usecase.manual_workorders.create_workorders
 
+
 import com.lasec.monitoreoapp.data.database.dao.manual_workorders.create_workorders.TaskPlanningRemoteMapDao
 import com.lasec.monitoreoapp.data.database.entities.manual_workorders.create_workorders.TaskPlanningRemoteMapEntity
 import com.lasec.monitoreoapp.data.remote.dto.TasksPlanningResponse
@@ -42,4 +43,3 @@ class SaveTpResponseUseCase @Inject constructor(
         }
     }
 }
-

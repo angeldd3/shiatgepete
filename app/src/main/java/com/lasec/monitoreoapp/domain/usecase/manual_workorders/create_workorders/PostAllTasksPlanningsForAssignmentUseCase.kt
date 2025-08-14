@@ -1,5 +1,7 @@
 package com.lasec.monitoreoapp.domain.usecase.manual_workorders.create_workorders
 
+
+import com.lasec.monitoreoapp.data.database.entities.manual_workorders.create_workorders.TaskPlanningRemoteMapEntity
 import com.lasec.monitoreoapp.data.remote.dto.TasksPlanningResponse
 import com.lasec.monitoreoapp.data.repository.manual_workorders.ManualWorkOrdersRepository
 import com.lasec.monitoreoapp.data.repository.manual_workorders.TasksPlanningRepository
@@ -11,7 +13,8 @@ import javax.inject.Inject
 class PostAllTasksPlanningsForAssignmentUseCase @Inject constructor(
     private val manualWorkOrdersRepository: ManualWorkOrdersRepository,
     private val workOrdersResponseRepository: WorkOrdersResponseRepository,
-    private val tasksPlanningRepo: TasksPlanningRepository
+    private val tasksPlanningRepo: TasksPlanningRepository,
+
 ) {
     suspend operator fun invoke(assignmentLocalId: Int): List<TasksPlanningResponse> = withContext(Dispatchers.IO) {
         val plannings = manualWorkOrdersRepository.getPlanningsByAssignmentLocalId(assignmentLocalId)
@@ -41,7 +44,6 @@ class PostAllTasksPlanningsForAssignmentUseCase @Inject constructor(
             if (!response.isSuccessful || response.body() == null) {
                 error("Error al postear TaskPlanning: HTTP ${response.code()} - ${response.errorBody()?.string()}")
             }
-
             results += response.body()!!
         }
 
