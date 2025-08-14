@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Color de fondo con transparencia (80% opaco) -->
+    <solid android:color="#990D2034" /> <!-- CC = 80% opacidad -->
+
+    <!-- Bordes redondeados -->
+    <corners android:radius="10dp" />
+
+</shape>
+
+<!--android:background="#0D2034"-->
+<!--    android:alpha="0.60"-->

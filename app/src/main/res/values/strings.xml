@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SimMonitoring</string>
+
+    <string name="completado_text">%1$s/%2$s Completado</string>
+    <string name="progreso_text">%1$s Completado</string>
+
+
+    <string name="order_number">No Orden de trabajo: %1$s</string>
+    <string name="estimated_end_time">Hora Final Estimada: %1$s</string>
+
+
+</resources>

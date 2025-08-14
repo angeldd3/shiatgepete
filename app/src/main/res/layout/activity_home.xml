@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fondo -->
+    <ImageView
+        android:id="@+id/fondo_inicio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/inicio_sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Barra superior -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.10"
+        android:background="#0D2034"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="182dp"
+            android:layout_height="50dp"
+            android:src="@drawable/smartflow" />
+
+        <Space
+            android:layout_width="35dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/ic_wifich"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_wifi_on" />
+
+        <ImageView
+            android:id="@+id/ic_bluetoothch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_bluetooth_on" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_calendar" />
+
+        <!-- Reloj -->
+        <TextView
+            android:id="@+id/tv_reloj"
+            android:layout_width="110dp"
+            android:layout_height="57dp"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="00/00/0000\n00:00:00"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_toolbar_profile" />
+
+        <Button
+            android:id="@+id/btn_userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:text=""
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Barra lateral -->
+    <LinearLayout
+        android:id="@+id/barra_lateral"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.07"
+        android:layout_height="0dp"
+        android:background="#0D2034"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_selected_home" />
+
+        <ImageButton
+            android:id="@+id/btn_checklist"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_carrier_load_rail_data" />
+
+        <ImageButton
+            android:id="@+id/btn_sinorder"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/order_truck_rail" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_logo_lasec" />
+    </LinearLayout>
+
+    <!-- Hasta Aqui -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toTopOf="@id/contenido_central"
+        app:layout_constraintStart_toEndOf="@id/barra_lateral"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <TextView
+            android:id="@+id/tv_sitioActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="Sitio Actual: "
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:drawableStartCompat="@drawable/ic_drawer_sites"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sitios"
+            app:layout_constraintStart_toEndOf="@id/tv_sitioActual"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sitioActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="24sp">
+
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/visor3d"
+        app:layout_constraintStart_toStartOf="@id/visor3d"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <TextView
+            android:id="@+id/estado_actividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Estado de Actividad: "
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/ic_estado"
+            app:layout_constraintStart_toEndOf="@id/estado_actividad"
+            app:layout_constraintBottom_toBottomOf="@id/estado_actividad"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Contenido Barra de Progreso -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenido_central"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.47"
+        app:layout_constraintHeight_percent="0.30"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/cu_style_progress_bar"
+        android:padding="16dp"
+        app:layout_constraintStart_toEndOf="@id/barra_lateral"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <!-- Barra de progreso -->
+        <ProgressBar
+            android:id="@+id/barra_progreso"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/cu_progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Texto 0% Completado -->
+        <TextView
+            android:id="@+id/tv_progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="0% Completado"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barra_progreso" />
+
+        <!-- Hora final estimada -->
+        <TextView
+            android:id="@+id/tv_horaFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Hora final Estimada: --:--:--"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_progreso" />
+
+        <!-- Tiempo transcurrido -->
+        <TextView
+            android:id="@+id/tv_tiempotrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Tiempo Transcurrido: --:--:--"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_horaFinal" />
+
+        <ImageButton
+            android:id="@+id/btn_pausa"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_start_activity"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toStartOf="@id/btn_cancelar"
+            app:layout_constraintHeight_percent="0.40"
+            app:layout_constraintTop_toBottomOf="@id/barra_progreso"
+            app:layout_constraintWidth_percent="0.15" />
+
+        <ImageButton
+            android:id="@+id/btn_detener"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_pause_activity"
+            android:layout_marginStart="190dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toStartOf="@id/btn_cancelar"
+            app:layout_constraintHeight_percent="0.40"
+            app:layout_constraintTop_toBottomOf="@id/barra_progreso"
+            app:layout_constraintWidth_percent="0.15" />
+
+        <ImageButton
+            android:id="@+id/btn_cancelar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_cancel_activity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.40"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@id/barra_progreso"
+            app:layout_constraintWidth_percent="0.15" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/visor3d"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintHeight_percent="0.38"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/cu_style_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <WebView
+            android:id="@+id/int_visor3d"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </WebView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ord_trabajo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.47"
+        app:layout_constraintHeight_percent="0.40"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/cu_style_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/barra_lateral">
+
+        <TextView
+            android:id="@+id/tv_orderNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="No. de Orden de Trabajo:"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tv_aviso_sin_orden"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.15"
+                android:gravity="center"
+                android:text="No tienes una orden de trabajo asignada"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_crearActividad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#1F7D9C"
+                android:text="Crear Actividad"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/tv_aviso_sin_orden"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_barraDatosOrden"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#081A2C"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_orderNumber">
+
+            <TextView
+                android:id="@+id/tv_sitioOrigen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Sitio Origen"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:gravity="center"
+                app:layout_constraintWidth_percent="0.20"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_num_economico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Num. Eco."
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:gravity="center"
+                app:layout_constraintWidth_percent="0.20"
+                app:layout_constraintStart_toEndOf="@id/tv_sitioOrigen"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_tipo_actividad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Tipo Acti."
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:gravity="center"
+                app:layout_constraintWidth_percent="0.20"
+                app:layout_constraintStart_toEndOf="@id/tv_num_economico"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Hora Inicio -->
+            <TextView
+                android:id="@+id/tv_hora_inicio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Hora Inicio"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:gravity="center"
+                app:layout_constraintWidth_percent="0.20"
+                app:layout_constraintStart_toEndOf="@id/tv_tipo_actividad"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Estado -->
+            <TextView
+                android:id="@+id/tv_estado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Estado"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:gravity="center"
+                app:layout_constraintWidth_percent="0.20"
+                app:layout_constraintStart_toEndOf="@id/tv_hora_inicio"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Línea inferior -->
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tv_estado"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="4dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@+id/cl_barraDatosOrden"
+            android:id="@+id/recyclerTasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintHeight_percent="0.35"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/visor3d"
+        app:layout_constraintStart_toEndOf="@+id/ord_trabajo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botón superior -->
+        <Button
+            android:id="@+id/btn_arriba"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.30"
+            android:backgroundTint="#1F7D9C"
+            android:text="Contabilizar"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/btn_arriba"
+            app:layout_constraintBottom_toBottomOf="@id/btn_arriba"
+            app:layout_constraintTop_toTopOf="@id/btn_arriba"
+            android:background="@drawable/ic_plus"/>
+
+        <!-- Recuadro de texto (EditText) -->
+        <TextView
+            android:id="@+id/tv_Conteo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.30"
+            android:background="@drawable/cu_style_button"
+            android:gravity="center"
+            android:text="0/0 Completado"
+            android:textColor="@color/white"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_arriba"
+            app:layout_constraintBottom_toTopOf="@id/btn_abajo"/>
+
+        <!-- Botón inferior -->
+        <Button
+            android:id="@+id/btn_abajo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.30"
+            android:backgroundTint="#AAAAAA"
+            android:text="Quitar"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/btn_incidencia_derecha"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.15"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.30"
+            android:background="@drawable/boton_redondo"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_incidents"
+            app:layout_constraintEnd_toEndOf="@+id/tv_Conteo"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_Conteo"
+            app:layout_constraintTop_toTopOf="@+id/tv_Conteo"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

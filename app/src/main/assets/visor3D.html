@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Modelo FBX</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #222; }
+        #info {
+            position: fixed;
+            top: 5px;
+            left: 5px;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            font-family: monospace;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/js/loaders/FBXLoader.js"></script>
+
+<script>
+    const info = document.getElementById('info');
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setClearColor(0x222222);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 1, 1).normalize();
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x555555));
+
+    const loader = new THREE.FBXLoader();
+
+    // === USO DE TOKEN Y FETCH BINARIO ===
+    function loadFBXFromAPI(url, token) {
+        info.textContent = "Descargando modelo desde API...";
+        fetch(url, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("No se pudo descargar el modelo");
+            return response.arrayBuffer();
+        })
+        .then(buffer => {
+            info.textContent = "Cargando modelo FBX...";
+            const blob = new Blob([buffer], { type: 'application/octet-stream' });
+            const objectURL = URL.createObjectURL(blob);
+
+            loader.load(objectURL, (object) => {
+                object.scale.set(0.4, 0.4, 0.4);
+                object.position.set(0, 4.16, -10.4);
+                scene.add(object);
+                info.textContent = "Modelo cargado correctamente";
+            }, undefined, (error) => {
+                console.error("Error al cargar el modelo:", error);
+                info.textContent = "Error al cargar el modelo";
+            });
+        })
+        .catch(err => {
+            console.error("Error:", err);
+            info.textContent = "Error: " + err.message;
+        });
+    }
+
+    // === CONFIGURA TU URL Y TOKEN ===
+    const modelUrl = "https://sim.smartflow.com.mx/service/catalog/api/v1/resources/visor/map";
+    const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkIyODc1RjY3MjA4NzcwQzcwRkUwMTlFNEM4NjdCOTE5MUE4REEyOUMiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJzb2RmWnlDSGNNY1A0Qm5reUdlNUdScU5vcHcifQ.eyJuYmYiOjE3NTE2NjMwMTMsImV4cCI6MTc1MTY2NjYxMywiaXNzIjoibnVsbCIsImF1ZCI6WyJudWxsL3Jlc291cmNlcyIsInNtYXJ0ZmxvdyIsIklkZW50aXR5U2VydmVyQXBpIl0sImNsaWVudF9pZCI6Im12Y19jb2RlIiwic3ViIjoiODc3Y2NjY2UtMDczOC00NTE1LThkMmEtYWUyZDUzNGU4ZWMyIiwiYXV0aF90aW1lIjoxNzUxNjYzMDEzLCJpZHAiOiJsb2NhbCIsInByZWZlcnJlZF91c2VybmFtZSI6Imp1YW5lc2NvYmVkbyIsIm5hbWUiOiJKVUFOIiwiaWRfdXNlciI6Ijg3N2NjY2NlLTA3MzgtNDUxNS04ZDJhLWFlMmQ1MzRlOGVjMiIsImxhc3RfbmFtZSI6IkVTQ09CRURPIiwidXNlcl9uYW1lIjoianVhbmVzY29iZWRvIiwiZW5hYmxlX2V4cGlyYXRpb24iOiJGYWxzZSIsImV4cGlyYXRpb25fZGF0ZSI6IjAxLzAxLzAwMDEgMDA6MDA6MDAiLCJsYW5ndWFnZV9tb2RlIjoiRVMiLCJlbXBsb3llZV9pZCI6IiIsImZpcnN0X2Nvbm5lY3Rpb24iOiJmYWxzZSIsImNoYW5nZV9wYXNzd29yZCI6IjE3NTA5NjE1ODQyMzYiLCJlbmFibGUiOiJUcnVlIiwic291bmQiOiJUcnVlIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoicHJhY3RpY2FudGUiLCJ4eEluZklkIjoiMmQyNDliMmQtNDM1Yy00MDRlLWE3MjQtYWE5MTFhZTc2MTNlIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiNDgyMzAwMTQyQGFsdW1ub3MudXR6YWMuZWR1Lm14Iiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsInNtYXJ0ZmxvdyIsIklkZW50aXR5U2VydmVyQXBpIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.L2fmORD4Zslt0DLHndr_AuZ7sAoKdKdJr3a3LOFE_WtY5Nby9evcaMSOsSR_9QsdDDfycGSMd6YhQA1eaxY4_qCV3eLFybqR3CsSPnvYBFSZJaZTo8f2vDv-QAED6bn5YhGtknDwkA9mr62sJFnlRWBpJu9l3JdSYQx50FZItESRBbLEffg82lNJIo4bmk96rSJlHfcQMUWnRss0ipBrfEVMo91pl_mhwRnL-t9wikGU6zCuLW71gZjBlzvXza1QZBirVIeF_Sd4_zfPgA96N8qbN4OITfbggqhQDwVNROrYK_RG0IGRwi_c59eAAQNJNiAgSF_gLRAWtif9YSm8ZA";
+
+    loadFBXFromAPI(modelUrl, token);
+
+    camera.position.set(0, 5, 50);
+    camera.lookAt(0, 0, 0);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>
+</body>
+</html>

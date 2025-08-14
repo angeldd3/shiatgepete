@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.actividad_sinorden.SinOrderActivity">
+
+    <!-- Fondo -->
+    <ImageView
+        android:id="@+id/fondo_inicio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/inicio_sesion"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Barra superior -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.10"
+        android:background="#0D2034"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="182dp"
+            android:layout_height="50dp"
+            android:src="@drawable/smartflow" />
+
+        <Space
+            android:layout_width="35dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/ic_wifich"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_wifi_on" />
+
+        <ImageView
+            android:id="@+id/ic_bluetoothch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_bluetooth_on" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_calendar" />
+
+        <!-- Reloj -->
+        <TextView
+            android:id="@+id/tv_reloj"
+            android:layout_width="110dp"
+            android:layout_height="65dp"
+            android:text="00/00/0000\n00:00:00"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:paddingTop="8dp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_toolbar_profile" />
+
+        <Button
+            android:id="@+id/btn_userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Adrian Davalos Amaya"
+            android:background="@android:color/transparent"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Barra lateral -->
+    <LinearLayout
+        android:id="@+id/barra_lateral"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.07"
+        android:layout_height="0dp"
+        android:background="#0D2034"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_rail_home" />
+
+        <ImageButton
+            android:id="@+id/btn_checklist"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_carrier_load_rail_data" />
+
+        <ImageButton
+            android:id="@+id/btn_sinorder"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/order_truck_selected" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_logo_lasec" />
+    </LinearLayout>
+
+    <!-- Hasta Aqui -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cheves"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent=".85"
+        app:layout_constraintHeight_percent=".80"
+        android:padding="25dp"
+        android:background="@drawable/cu_style_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/barra_lateral"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <TextView
+            android:id="@+id/titulo_form"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36dp"
+            android:textColor="@color/white"
+            android:text="Crear Actividad Sin Orden de Trabajo"/>
+
+        <TextView
+            android:id="@+id/tv_noEconomico"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titulo_form"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Numero Económico"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        <Spinner
+            android:id="@+id/sp_noEconomico"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.43"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            android:paddingStart="5dp"
+            android:textColorHint="#777777"
+            android:textColor="#777777"
+            android:background="@drawable/fondo_edittext"
+            app:layout_constraintTop_toBottomOf="@id/tv_noEconomico"
+            app:layout_constraintStart_toStartOf="@id/tv_noEconomico"/>
+
+        <TextView
+            android:id="@+id/tv_tipoActividad"
+            app:layout_constraintStart_toStartOf="@id/sp_noEconomico"
+            app:layout_constraintTop_toBottomOf="@id/sp_noEconomico"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Actividad"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        <Spinner
+            android:id="@+id/sp_tipoActividad"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.43"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            android:paddingStart="5dp"
+            android:textColorHint="#777777"
+            android:textColor="#777777"
+            android:background="@drawable/fondo_edittext"
+            app:layout_constraintTop_toBottomOf="@id/tv_tipoActividad"
+            app:layout_constraintStart_toStartOf="@id/tv_tipoActividad"/>
+
+        <TextView
+            android:id="@+id/tv_cantidadRealizar"
+            app:layout_constraintStart_toStartOf="@id/sp_tipoActividad"
+            app:layout_constraintTop_toBottomOf="@id/sp_tipoActividad"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cantidad a Realizar"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        <EditText
+            android:id="@+id/sp_cantidadRealizar"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.43"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            android:paddingStart="15dp"
+            android:hint="ej. 22"
+            android:textSize="18dp"
+            android:textColorHint="@color/black"
+            android:background="@drawable/fondo_edittext"
+            app:layout_constraintTop_toBottomOf="@id/tv_cantidadRealizar"
+            app:layout_constraintStart_toStartOf="@id/tv_cantidadRealizar"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:imeOptions="actionDone"/>
+
+<!--        Columna Derecha-->
+        <TextView
+            android:id="@+id/tv_sitioActividad"
+            app:layout_constraintTop_toBottomOf="@id/titulo_form"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_noEconomico"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sitio de Actividad"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        <Spinner
+            android:id="@+id/sp_sitioActividad"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.43"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            android:paddingStart="5dp"
+            android:textColorHint="#777777"
+            android:textColor="#777777"
+            android:background="@drawable/fondo_edittext"
+            app:layout_constraintTop_toBottomOf="@id/tv_sitioActividad"
+            app:layout_constraintStart_toStartOf="@id/tv_sitioActividad"/>
+
+        <TextView
+            android:id="@+id/tv_horaInicio"
+            app:layout_constraintStart_toStartOf="@id/sp_sitioActividad"
+            app:layout_constraintTop_toBottomOf="@id/sp_sitioActividad"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora de Inicio Estimada"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        <EditText
+            android:id="@+id/sp_horaInicio"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.43"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            android:paddingStart="15dp"
+            android:hint="00:00:00"
+            android:textSize="18dp"
+            android:textColorHint="@color/black"
+            android:background="@drawable/fondo_edittext"
+            app:layout_constraintTop_toBottomOf="@id/tv_horaInicio"
+            app:layout_constraintStart_toStartOf="@id/tv_horaInicio"
+            android:focusable="false"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_horaFinal"
+            app:layout_constraintStart_toStartOf="@id/sp_horaInicio"
+            app:layout_constraintTop_toBottomOf="@id/sp_horaInicio"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora Final Estimada"
+            android:textColor="@color/white"
+            android:textSize="28dp" />
+
+        <EditText
+            android:id="@+id/sp_horaFinal"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.43"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.08"
+            android:paddingStart="15dp"
+            android:hint="00:00:00"
+            android:background="@drawable/fondo_edittext"
+            app:layout_constraintTop_toBottomOf="@id/tv_horaFinal"
+            app:layout_constraintStart_toStartOf="@id/tv_horaFinal"
+            android:focusable="false"
+            android:clickable="true"/>
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_calcularHoraFinal"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/sp_horaFinal"-->
+<!--            app:layout_constraintStart_toStartOf="@id/sp_horaFinal"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/sp_horaFinal"-->
+<!--            android:layout_width="0dp"-->
+<!--            app:layout_constraintWidth_percent="0.43"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintHeight_percent="0.1"-->
+<!--            android:text="Calcular Hora Final"-->
+<!--            android:backgroundTint="#1F7D9C"-->
+<!--            android:textSize="18dp"/>-->
+
+        <Button
+            android:id="@+id/btn_enviarForm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/sp_cantidadRealizar"
+            app:layout_constraintEnd_toEndOf="@id/sp_horaFinal"
+            android:layout_width="0dp"
+            app:layout_constraintWidth_percent="0.80"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.14"
+            android:text="Registrar Actividad"
+            android:backgroundTint="#1F7D9C"
+            android:textSize="28sp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

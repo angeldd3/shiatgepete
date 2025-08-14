@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/cu_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/dialog_titulo"
+        android:text="¿Seguro que quieres crear una actividad sin orden de trabajo?"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Mensaje -->
+    <TextView
+        android:id="@+id/dialog_mensaje"
+        android:text="Esto generara una actividad que se debera especificar manualmente por ti."
+        android:textSize="22sp"
+        android:textColor="#DDDDDD"
+        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Botones -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/cu_btn_roundedcolors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:text="Cancelar"
+            android:layout_marginEnd="10dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ffffff"
+            android:textColor="#000000"/>
+
+        <Button
+            android:id="@+id/btn_aceptar"
+            android:text="Aceptar"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+</LinearLayout>

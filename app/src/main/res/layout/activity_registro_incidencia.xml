@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fondo -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="143C66"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
+    <ImageView
+        android:id="@+id/fondo_inicio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/inicio_sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Barra superior -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.10"
+        android:background="#0D2034"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="182dp"
+            android:layout_height="50dp"
+            android:src="@drawable/smartflow" />
+
+        <Space
+            android:layout_width="35dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/ic_wifich"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_wifi_on" />
+
+        <ImageView
+            android:id="@+id/ic_bluetoothch"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_bluetooth_on" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_calendar" />
+
+        <!-- Reloj -->
+        <TextView
+            android:id="@+id/tv_reloj"
+            android:layout_width="110dp"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="00/00/0000\n00:00:00"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_toolbar_profile" />
+
+        <Button
+            android:id="@+id/boton_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:text="Adrian Davalos Amaya"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Barra lateral -->
+    <LinearLayout
+        android:id="@+id/barra_lateral"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.07"
+        android:layout_height="0dp"
+        android:background="#0D2034"
+        android:gravity="top|center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_selected_home"
+            android:contentDescription="Inicio" />
+
+
+        <ImageButton
+            android:id="@+id/btn_checklist"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ic_carrier_load_rail_data"
+            android:contentDescription="Checklist"/>
+
+        <ImageButton
+            android:id="@+id/btn_sinorder"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/order_truck_rail"
+            android:contentDescription="Órdenes sin asignar"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_logo_lasec" />
+    </LinearLayout>
+
+    <!-- Hasta Aqui -->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        app:layout_constraintStart_toEndOf="@id/barra_lateral"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/top_bar"/>-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/top_bar"-->
+<!--        tools:layout_editor_absoluteX="727dp" />-->
+
+    <!-- Contenido Barra de Progreso -->
+
+
+    <LinearLayout
+        android:id="@+id/contenedor_info_registro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.85">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="6dp"
+            android:text="Registro de Incidencia"
+            android:textColor="@android:color/white"
+            android:textSize="55dp"
+            android:textStyle="bold" />
+
+        <!-- Descripción -->
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contenedor_registro"
+        android:layout_width="0dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="50dp"
+        android:background="#001933"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901"
+        app:layout_constraintWidth_percent="0.85">
+
+        <!-- Columna izquierda: Spinners -->
+        <LinearLayout
+            android:id="@+id/contenido_izquierda"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/descripcion_container"
+            app:layout_constraintWidth_percent="0.5"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Tipo de falla*"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/spinner_tipo_falla"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="24dp"
+                android:background="#183C66"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Motivo*"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+            <Spinner
+                android:id="@+id/spinner_motivo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#183C66"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <!-- Parte derecha: Descripción -->
+        <LinearLayout
+            android:id="@+id/descripcion_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/contenido_izquierda"
+            app:layout_constraintWidth_percent="0.5"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/tvDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción*"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#183C66"
+                android:gravity="top|start"
+                android:hint="Escribe aquí..."
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:padding="12dp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Botones debajo (alineados al centro) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/contenido_izquierda"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btnBaja"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Baja"
+                android:textSize="18sp"
+                android:backgroundTint="#143C66"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnMedia"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:text="Media"
+                android:textSize="18sp"
+                android:backgroundTint="#143C66"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnAlta"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Alta"
+                android:textSize="18sp"
+                android:backgroundTint="#143C66"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_enviar_incidencia"
+        android:layout_width="500dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#6DAFC6"
+        android:text="Registrar Incidencia"
+        android:textColor="#001933"
+        tools:layout_editor_absoluteX="699dp"
+        tools:layout_editor_absoluteY="745dp" />
+
+
+    <!--        <Button-->
+        <!--            android:id="@+id/btn_registrar_incidencia"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="120dp"-->
+        <!--            android:layout_marginTop="24dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:backgroundTint="#143C66"-->
+        <!--            android:text="Selecciona un tipo de falla"-->
+        <!--            android:textColor="#FFFFFF"-->
+        <!--            android:textSize="55sp" />-->
+
+
+        <!--        <Spinner-->
+        <!--            android:id="@+id/spinner_categoria"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:visibility="gone" />-->
+
+        <!--        &lt;!&ndash; Spinner 2 &ndash;&gt;-->
+        <!--        <Spinner-->
+        <!--            android:id="@+id/spinner_subcategoria"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:visibility="gone" />-->
+
+        <!-- Botón Enviar -->
+        <!--        <Button-->
+        <!--            android:id="@+id/btn_enviar_incidencia"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            android:layout_marginTop="25dp"-->
+        <!--            android:backgroundTint="#6DAFC6"-->
+        <!--            android:text="Registrar Incidencia"-->
+        <!--            android:textColor="ffff"/>-->
+        <!--            &lt;!&ndash;android:visibility="gone" /&ndash;&gt;-->
+
+<!--    </LinearLayout>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_enviar_incidencia"-->
+<!--        android:layout_width="500dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="80dp"-->
+<!--        android:backgroundTint="#6DAFC6"-->
+<!--        android:text="Registrar Incidencia"-->
+<!--        android:textColor="#001933"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/contenedor_registro" />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/inicio_sesion"
+    tools:context=".presentation.screens.login.LoginActivity">
+
+    <View
+        android:id="@+id/smartflow"
+        app:layout_constraintEnd_toEndOf="@id/cajaInicioSesion"
+        app:layout_constraintStart_toStartOf="@id/cajaInicioSesion"
+        app:layout_constraintBottom_toTopOf="@+id/cajaInicioSesion"
+        android:background="@drawable/smartflow"
+        android:layout_width="210dp"
+        android:layout_height="60dp">
+
+    </View>
+
+    <View
+        android:id="@+id/cajaInicioSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/viewrounded"
+        android:layout_width="674dp"
+        android:layout_height="333dp">
+
+    </View>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:text="Inicia de Sesión"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/cajaInicioSesion"
+        app:layout_constraintEnd_toEndOf="@id/cajaInicioSesion"
+        app:layout_constraintStart_toStartOf="@id/cajaInicioSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre del empleado:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="@id/autoCompleteEmpleado"
+        app:layout_constraintBottom_toTopOf="@id/autoCompleteEmpleado"/>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteEmpleado"
+        android:layout_width="626dp"
+        android:layout_height="40dp"
+        android:background="@drawable/roundedcorners"
+        android:hint="Buscar empleado..."
+        android:inputType="text"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:paddingLeft="10dp"
+        android:textColor="#828282"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnIniciar"
+        app:layout_constraintEnd_toEndOf="@id/btnIniciar"
+        app:layout_constraintStart_toStartOf="@id/btnIniciar"
+        android:layout_marginBottom="108dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/numeroempleado"
+        android:text="Numero del Empleado:"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/editnumber"
+        app:layout_constraintBottom_toTopOf="@id/editnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editnumber"
+        android:layout_width="626dp"
+        android:layout_height="40dp"
+        android:background="@drawable/roundedcorners"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:inputType="number"
+        android:hint="********"
+        android:textColor="#828282"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/btnIniciar"
+        app:layout_constraintEnd_toEndOf="@id/cajaInicioSesion"
+        app:layout_constraintStart_toStartOf="@id/cajaInicioSesion"
+        app:layout_constraintVertical_bias="0.026">
+
+    </androidx.appcompat.widget.AppCompatEditText>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnIniciar"
+        android:text="Ingresar"
+        android:background="@drawable/buttonrounded"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="626dp"
+        android:layout_height="61dp"
+        app:layout_constraintStart_toStartOf="@id/cajaInicioSesion"
+        app:layout_constraintEnd_toEndOf="@id/cajaInicioSesion"
+        app:layout_constraintBottom_toBottomOf="@id/cajaInicioSesion">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+    <View
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/logo"
+        android:layout_height="79dp"
+        android:layout_width="88dp">
+
+    </View>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
