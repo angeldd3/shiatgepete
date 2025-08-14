@@ -372,6 +372,12 @@ class SinOrderActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
+                val adjustedShiftId = when (shift.id) {
+                    1 -> 2
+                    2 -> 1
+                    else -> shift.id
+                }
+
                 val inicio = editHora.text.toString().trim()
                 val fin    = editHoraFinal.text.toString().trim()
                 val cantidad = editCantidad.text.toString().toDoubleOrNull() ?: 0.0
@@ -398,6 +404,7 @@ class SinOrderActivity : AppCompatActivity() {
                 val today = java.time.LocalDate.now()
                 val initIso = "${today}T${if (inicio.length == 5) "$inicio:00" else inicio}"
                 val endIso  = "${today}T${if (fin.length == 5) "$fin:00" else fin}"
+                Log.d("SinOrder", "initIso(local)=$initIso endIso(local)=$endIso")
 
                 // Usar la extensión para obtener horas/min/seg
                 val hms = shift.extractHMS()
@@ -406,7 +413,7 @@ class SinOrderActivity : AppCompatActivity() {
                 registerVM.registerActivity(
                     indexEmployeeId = sessionManager.getIndexEmployeeId(),
 
-                    workShiftId = shift.id,
+                    workShiftId = adjustedShiftId,
                     workShiftDescription = shift.description,
                     workShiftStart = shift.startTime,   // <- String "HH:mm[:ss]"
                     workShiftEnd   = shift.endTime,     // <- String "HH:mm[:ss]"

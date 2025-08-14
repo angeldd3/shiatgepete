@@ -1,15 +1,17 @@
 package com.lasec.monitoreoapp.domain.usecase.manual_workorders.create_workorders
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.lasec.monitoreoapp.data.database.entities.manual_workorders.TaskAssignmentEntity
 import com.lasec.monitoreoapp.data.database.entities.manual_workorders.TaskPlanningEntity
 import com.lasec.monitoreoapp.data.repository.manual_workorders.ManualWorkOrdersRepository
-import com.lasec.monitoreoapp.domain.extensions.manual_workorders.MX_ZONE
 import com.lasec.monitoreoapp.domain.extensions.manual_workorders.toUtcIsoZ
 import com.lasec.monitoreoapp.domain.model.manual_workorders.RegisterActivityParams
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -22,11 +24,12 @@ class RegisterActivityLocalUseCase @Inject constructor(
         val startLT = LocalTime.parse(p.workShiftStart, f)
         val endLT   = LocalTime.parse(p.workShiftEnd, f)
 
-        val workDate = LocalDate.now(MX_ZONE)
+        val workDate = LocalDate.now(ZoneId.systemDefault())
 
-        val initUtcIso = p.initTimeLocal.toUtcIsoZ(workDate)
-        val endUtcIso  = p.endTimeLocal.toUtcIsoZ(workDate)
-
+        // ✅ Convierte a UTC con Z y aplica “opuesto” (+6/-6/0 según workShiftId)
+        val initUtcIso = p.initTimeLocal.toUtcIsoZ(workDate, p.workShiftId)
+        val endUtcIso  = p.endTimeLocal.toUtcIsoZ(workDate, p.workShiftId)
+        Log.d("SinOrder", "UTC opuesto init=$initUtcIso end=$endUtcIso")
         val assignment = TaskAssignmentEntity(
             indexEmployeeId = p.indexEmployeeId,
             cloned = false,

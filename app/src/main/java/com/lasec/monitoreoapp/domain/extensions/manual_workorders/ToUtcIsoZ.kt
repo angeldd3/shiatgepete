@@ -6,52 +6,65 @@ import java.time.*
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 
+
+
 @RequiresApi(Build.VERSION_CODES.O)
 private val TIME_ONLY: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm[:ss]")
+
 @RequiresApi(Build.VERSION_CODES.O)
 private val ISO_LOCAL_DT: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME // 2025-08-12T16:30:00
+
+// ⚠️ Formateador 24h forzado en UTC con 'Z' literal
 @RequiresApi(Build.VERSION_CODES.O)
-private val ISO_INSTANT_FMT: DateTimeFormatter = DateTimeFormatter.ISO_INSTANT
-@RequiresApi(Build.VERSION_CODES.O)
-val MX_ZONE: ZoneId = ZoneId.of("America/Mexico_City")
+private val UTC_24H_FMT: DateTimeFormatter =
+    DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'").withZone(ZoneOffset.UTC)
 
 /**
- * Convierte distintos formatos de entrada a ISO-8601 UTC (terminado en Z).
+ * Convierte a ISO-8601 UTC (Z) y aplica desplazamiento "opuesto" por turno:
+ *   - workShiftId == 1 -> +6h
+ *   - workShiftId == 2 -> -6h
+ *   - otros            -> 0h
+ *
  * Acepta:
- *  - "HH:mm" o "HH:mm:ss"  (interpreta la fecha como 'workDate' en zona MX)
- *  - "yyyy-MM-dd'T'HH:mm[:ss]" (asume zona MX)
- *  - "yyyy-MM-dd'T'HH:mm[:ss]XXX" o "....Z" (usa el offset/UTC provisto)
+ *  - "HH:mm" o "HH:mm:ss"            -> combina con workDate en UTC
+ *  - "yyyy-MM-dd'T'HH:mm[:ss]"       -> interpreta como UTC (sin zona)
+ *  - "yyyy-MM-dd'T'HH:mm[:ss]XXX"/Z  -> respeta offset/Z
+ *
+ * No se asume zona local.
  */
 @RequiresApi(Build.VERSION_CODES.O)
-fun String.toUtcIsoZ(workDate: LocalDate = LocalDate.now(MX_ZONE)): String {
+fun String.toUtcIsoZ(workDate: LocalDate, workShiftId: Int): String {
+    val deltaHours = when (workShiftId) {
+        1 -> 6L
+        2 -> -6L
+        else -> 0L
+    }
+    fun Instant.applyDelta(): Instant = plusSeconds(deltaHours * 3600)
+
+    // 1) Intentar con OffsetDateTime (maneja ...Z y ...±HH:mm)
+    runCatching { OffsetDateTime.parse(this).toInstant() }
+        .getOrNull()
+        ?.let { return UTC_24H_FMT.format(it.applyDelta()) }
+
+    // 2) Intentar Instant puro (ISO con Z)
+    runCatching { Instant.parse(this) }
+        .getOrNull()
+        ?.let { return UTC_24H_FMT.format(it.applyDelta()) }
+
     return try {
-        when {
-            // Caso 1: contiene offset o Z (ej: 2025-08-12T16:30:00Z o 2025-08-12T16:30:00-06:00)
-            endsWith("Z") || contains('+') || substringAfterLast('T', "").contains('+') -> {
-                // Intentar OffsetDateTime primero
-                val odt = OffsetDateTime.parse(this)
-                ISO_INSTANT_FMT.format(odt.toInstant())
-            }
-            // Caso 2: contiene 'T' pero sin Z/offset -> ISO local date-time
-            contains('T') -> {
-                val ldt = LocalDateTime.parse(this, ISO_LOCAL_DT)
-                val zdt = ldt.atZone(MX_ZONE)
-                ISO_INSTANT_FMT.format(zdt.toInstant())
-            }
-            // Caso 3: solo hora -> usar workDate
-            else -> {
-                val lt = LocalTime.parse(this, TIME_ONLY)
-                val zdt = ZonedDateTime.of(workDate, lt, MX_ZONE)
-                ISO_INSTANT_FMT.format(zdt.toInstant())
-            }
+        if (contains('T')) {
+            // 3) LocalDateTime sin zona -> tomar como UTC
+            val ldt = LocalDateTime.parse(this, ISO_LOCAL_DT)
+            val inst = ldt.toInstant(ZoneOffset.UTC)
+            UTC_24H_FMT.format(inst.applyDelta())
+        } else {
+            // 4) Solo hora -> combinar con workDate (UTC)
+            val lt = LocalTime.parse(this, TIME_ONLY)
+            val zdtUtc = ZonedDateTime.of(workDate, lt, ZoneOffset.UTC)
+            UTC_24H_FMT.format(zdtUtc.toInstant().applyDelta())
         }
     } catch (e: DateTimeParseException) {
-        // fallback pequeño: intenta parsear como Instant si viniera en otro ISO válido
-        try {
-            val inst = Instant.parse(this)
-            ISO_INSTANT_FMT.format(inst)
-        } catch (_: Throwable) {
-            throw e // re-lanza el error original para depurar
-        }
+        throw e
     }
 }
+
