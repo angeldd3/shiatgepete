@@ -2,6 +2,7 @@ package com.lasec.monitoreoapp.domain.usecase.manual_workorders.create_workorder
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.lasec.monitoreoapp.data.remote.dto.TasksPlanningResponse
 import com.lasec.monitoreoapp.data.remote.dto.WorkOrdersDispatchResponse
 import com.lasec.monitoreoapp.domain.model.manual_workorders.RegisterActivityParams
 import javax.inject.Inject
@@ -35,7 +36,8 @@ class RegisterAndPostWorkOrderUseCase @Inject constructor(
         )
 
         authorizeVehiclesForAssignment(assignmentLocalId)
-        postAllTasksPlannings(assignmentLocalId)
+        val tpResponses: List<TasksPlanningResponse> = postAllTasksPlannings(assignmentLocalId)
+
 
 
         return response

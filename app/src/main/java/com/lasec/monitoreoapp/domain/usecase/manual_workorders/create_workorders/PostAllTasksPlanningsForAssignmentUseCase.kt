@@ -2,6 +2,7 @@ package com.lasec.monitoreoapp.domain.usecase.manual_workorders.create_workorder
 
 import com.lasec.monitoreoapp.data.database.dao.manual_workorders.create_workorders.TaskPlanningRemoteMapDao
 import com.lasec.monitoreoapp.data.database.entities.manual_workorders.create_workorders.TaskPlanningRemoteMapEntity
+import com.lasec.monitoreoapp.data.remote.dto.TasksPlanningResponse
 import com.lasec.monitoreoapp.data.repository.manual_workorders.ManualWorkOrdersRepository
 import com.lasec.monitoreoapp.data.repository.manual_workorders.TasksPlanningRepository
 import com.lasec.monitoreoapp.data.repository.manual_workorders.create_workorders.WorkOrdersResponseRepository
@@ -15,19 +16,19 @@ class PostAllTasksPlanningsForAssignmentUseCase @Inject constructor(
     private val tasksPlanningRepo: TasksPlanningRepository,
     private val taskPlanningRemoteMapDao: TaskPlanningRemoteMapDao
 ) {
-    suspend operator fun invoke(assignmentLocalId: Int) = withContext(Dispatchers.IO) {
-        // 1) Obtener todos los TaskPlanning locales para este assignment
+    suspend operator fun invoke(assignmentLocalId: Int): List<TasksPlanningResponse> = withContext(Dispatchers.IO) {
         val plannings = manualWorkOrdersRepository.getPlanningsByAssignmentLocalId(assignmentLocalId)
-        val workOrderId = workOrdersResponseRepository.getWorkOrderIdForAssignment(assignmentLocalId)
 
-        require(plannings.isNotEmpty()) {
-            "No hay TaskPlanning para el assignmentLocalId=$assignmentLocalId"
-        }
+        val workOrderId = workOrdersResponseRepository
+            .getWorkOrderIdForAssignment(assignmentLocalId)
+            ?: error("No hay workOrderId vinculado al assignmentLocalId=$assignmentLocalId")
 
-        // 2) Iterar y postear cada uno
+        require(plannings.isNotEmpty()) { "No hay TaskPlanning para el assignmentLocalId=$assignmentLocalId" }
+
+        val results = mutableListOf<TasksPlanningResponse>()
+
         for (tp in plannings) {
-            // Buscar el placeWorkOrderId correspondiente al placeId de este planning
-            val placeWorkOrderId = workOrdersResponseRepository.getPlaceWorkOrderId(workOrderId,tp.placeId)
+            val placeWorkOrderId = workOrdersResponseRepository.getPlaceWorkOrderId(workOrderId, tp.placeId)
                 ?: error("No se encontró placeWorkOrderId para placeId=${tp.placeId}")
 
             val response = tasksPlanningRepo.postTasksPlanning(
@@ -44,15 +45,17 @@ class PostAllTasksPlanningsForAssignmentUseCase @Inject constructor(
                 error("Error al postear TaskPlanning: HTTP ${response.code()} - ${response.errorBody()?.string()}")
             }
 
-            val remoteId = response.body()!!.taskPlanningId
+            val body = response.body()!!
+            results += body
 
-            // 3) Guardar mapeo local → remoto en Room
             taskPlanningRemoteMapDao.insertMap(
                 TaskPlanningRemoteMapEntity(
                     taskPlanningLocalId = tp.taskPlanningLocalId,
-                    taskPlanningIdRemote = remoteId
+                    taskPlanningIdRemote = body.taskPlanningId
                 )
             )
         }
+
+        results
     }
 }
